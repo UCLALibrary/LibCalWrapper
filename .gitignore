@@ -1,0 +1,15 @@
+### Java in general ###
+*.class
+
+### Maven ###
+target/
+# Maven downloads project dependencies here
+# Is this better than .gitignore-ing all *.jar?
+public_html/WEB-INF/lib/
+
+### JDeveloper-specific ###
+# default output directories
+classes/
+deploy/
+# But keep classes/log4j.properties
+!classes/log4j.properties
