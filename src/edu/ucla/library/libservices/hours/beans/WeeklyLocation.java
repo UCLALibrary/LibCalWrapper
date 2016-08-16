@@ -17,25 +17,6 @@ public class WeeklyLocation
   private String category;
   @XmlElement(name = "parent_lid", nillable = true)
   private int parentLocationID;
-  @XmlElement(name = "desc")
-  private String description;
-  @XmlElement(name = "url")
-  private String url;
-  @XmlElement(name = "contact")
-  private String contact;
-  @XmlElement(name = "lat")
-  private String latitude;
-  @XmlElement(name = "long")
-  private String longitude;
-  @XmlElement(name = "color")
-  private String color;
-  @XmlElement(name = "weeks")
-  private List<Week> weeks;
-
-  public WeeklyLocation()
-  {
-    super();
-  }
 
   public void setLocationID( int locationID )
   {
@@ -145,5 +126,24 @@ public class WeeklyLocation
   public List<Week> getWeeks()
   {
     return weeks;
+  }
+  @XmlElement(name = "desc")
+  private String description;
+  @XmlElement(name = "url")
+  private String url;
+  @XmlElement(name = "contact")
+  private String contact;
+  @XmlElement(name = "lat")
+  private String latitude;
+  @XmlElement(name = "long")
+  private String longitude;
+  @XmlElement(name = "color")
+  private String color;
+  @XmlElement(name = "weeks")
+  private List<Week> weeks;
+
+  public WeeklyLocation()
+  {
+    super();
   }
 }

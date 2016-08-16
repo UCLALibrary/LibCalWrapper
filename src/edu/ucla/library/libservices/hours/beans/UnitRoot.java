@@ -5,25 +5,27 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import java.util.List;
+
 @XmlAccessorType( XmlAccessType.FIELD )
 @XmlRootElement( name="libcal" )
 public class UnitRoot
 {
   @XmlElement(name = "locations")
-  private Unit[] units;
-  
-  public UnitRoot()
-  {
-    super();
-  }
+  private List<Unit> units;
 
-  public void setUnits( Unit[] units )
+  public void setUnits( List<Unit> units )
   {
     this.units = units;
   }
 
-  public Unit[] getUnits()
+  public List<Unit> getUnits()
   {
     return units;
+  }
+
+  public UnitRoot()
+  {
+    super();
   }
 }

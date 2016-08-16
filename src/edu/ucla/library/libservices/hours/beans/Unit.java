@@ -14,11 +14,6 @@ public class Unit
   @XmlElement(name = "category")
   private String category;
 
-  public Unit()
-  {
-    super();
-  }
-
   public void setLocationID( int locationID )
   {
     this.locationID = locationID;
@@ -47,5 +42,10 @@ public class Unit
   public String getCategory()
   {
     return category;
+  }
+
+  public Unit()
+  {
+    super();
   }
 }

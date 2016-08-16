@@ -11,11 +11,6 @@ public class Hour
   private String from;
   @XmlElement(name = "to")
   private String to;
-  
-  public Hour()
-  {
-    super();
-  }
 
   public void setFrom( String from )
   {
@@ -35,5 +30,10 @@ public class Hour
   public String getTo()
   {
     return to;
+  }
+
+  public Hour()
+  {
+    super();
   }
 }

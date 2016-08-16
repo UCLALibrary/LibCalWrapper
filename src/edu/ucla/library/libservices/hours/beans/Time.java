@@ -18,11 +18,6 @@ public class Time
   @XmlElement( name = "hours", nillable = true )
   private List<Hour> hours;
 
-  public Time()
-  {
-    super();
-  }
-
   public void setCurrentlyOpen( boolean currentlyOpen )
   {
     this.currentlyOpen = currentlyOpen;
@@ -43,6 +38,16 @@ public class Time
     return status;
   }
 
+  public void setText( String text )
+  {
+    this.text = text;
+  }
+
+  public String getText()
+  {
+    return text;
+  }
+
   public void setHours( List<Hour> hours )
   {
     this.hours = hours;
@@ -53,13 +58,8 @@ public class Time
     return hours;
   }
 
-  public void setText( String text )
+  public Time()
   {
-    this.text = text;
-  }
-
-  public String getText()
-  {
-    return text;
+    super();
   }
 }

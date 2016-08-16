@@ -17,25 +17,6 @@ public class DailyLocation
   private String day;
   @XmlElement(name = "desc")
   private String description;
-  @XmlElement(name = "url")
-  private String url;
-  @XmlElement(name = "contact")
-  private String contact;
-  @XmlElement(name = "lat")
-  private String latitude;
-  @XmlElement(name = "long")
-  private String longitude;
-  @XmlElement(name = "color")
-  private String color;
-  @XmlElement(name = "times")
-  private Time times;
-  @XmlElement(name = "rendered")
-  private String rendered;
-  
-  public DailyLocation()
-  {
-    super();
-  }
 
   public void setLocationID( int locationID )
   {
@@ -155,5 +136,24 @@ public class DailyLocation
   public String getRendered()
   {
     return rendered;
+  }
+  @XmlElement(name = "url")
+  private String url;
+  @XmlElement(name = "contact")
+  private String contact;
+  @XmlElement(name = "lat")
+  private String latitude;
+  @XmlElement(name = "long")
+  private String longitude;
+  @XmlElement(name = "color")
+  private String color;
+  @XmlElement(name = "times")
+  private Time times;
+  @XmlElement(name = "rendered")
+  private String rendered;
+  
+  public DailyLocation()
+  {
+    super();
   }
 }

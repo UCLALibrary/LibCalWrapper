@@ -1,16 +1,21 @@
 package edu.ucla.library.libservices.hours.clients;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
+//import com.sun.jersey.api.client.Client;
+//import com.sun.jersey.api.client.WebResource;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 
 import edu.ucla.library.libservices.hours.beans.WeeklyLocationRoot;
 
-import javax.ws.rs.core.MediaType;
+//import javax.ws.rs.core.MediaType;
 
 public class WeeklyHoursClient
 {
   private Client client;
-  private WebResource webResource;
+  private WebTarget webResource;
   private int institutionID;
   private int locationID;
   private int weeksCount;
@@ -53,20 +58,16 @@ public class WeeklyHoursClient
 
   public WeeklyLocationRoot getTheLocation()
   {
-    client = Client.create();
+    client = ClientBuilder.newClient();
     webResource =
-        client.resource( "https://api3.libcal.com/api_hours_grid.php?iid="
+        client.target( "https://api3.libcal.com/api_hours_grid.php?iid="
         .concat( String.valueOf( getInstitutionID() ) )
         .concat( "&lid=" ).concat( String.valueOf( getLocationID() ) )
         .concat( "&weeks=" ).concat( String.valueOf( getWeeksCount() ) )
         .concat( "&format=json" ) );
-    System.out.println( webResource.getURI().getHost() + "/" +
-                        webResource.getURI().getPath() + "?" +
-                        webResource.getURI().getQuery() );
 
     theLocation =
-        webResource.header( "charset", "utf-8" ).accept( MediaType.APPLICATION_XML,
-                                                         MediaType.APPLICATION_JSON ).get( WeeklyLocationRoot.class );
+        webResource.request(MediaType.APPLICATION_JSON).get().readEntity( WeeklyLocationRoot.class );
     return theLocation;
   }
 }

@@ -1,5 +1,7 @@
 package edu.ucla.library.libservices.hours.beans;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -10,20 +12,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class DailyLocationRoot
 {
   @XmlElement(name = "locations")
-  private DailyLocation[] locations;
-  
-  public DailyLocationRoot()
+  private List<DailyLocation> locations;
+
+  public void setLocations( List<DailyLocation> locations )
   {
-    super();
+    this.locations = locations;
   }
 
-  public DailyLocation[] getLocations()
+  public List<DailyLocation> getLocations()
   {
     return locations;
   }
 
-  public void setLocations( DailyLocation[] locations )
+  public DailyLocationRoot()
   {
-    this.locations = locations;
+    super();
   }
 }
