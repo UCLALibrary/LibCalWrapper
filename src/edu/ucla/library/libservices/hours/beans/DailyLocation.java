@@ -1,5 +1,9 @@
 package edu.ucla.library.libservices.hours.beans;
 
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -7,6 +11,8 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlAccessorType( XmlAccessType.FIELD )
 public class DailyLocation
 {
+  static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
   @XmlElement(name = "lid")
   private int locationID;
   @XmlElement(name = "name")
@@ -17,6 +23,25 @@ public class DailyLocation
   private String day;
   @XmlElement(name = "desc")
   private String description;
+  @XmlElement(name = "url")
+  private String url;
+  @XmlElement(name = "contact")
+  private String contact;
+  @XmlElement(name = "lat")
+  private String latitude;
+  @XmlElement(name = "long")
+  private String longitude;
+  @XmlElement(name = "color")
+  private String color;
+  @XmlElement(name = "times")
+  private Time times;
+  @XmlElement(name = "rendered")
+  private String rendered;
+
+  public DailyLocation()
+  {
+    super();
+  }
 
   public void setLocationID( int locationID )
   {
@@ -125,6 +150,7 @@ public class DailyLocation
 
   public Time getTimes()
   {
+    times.setDate( FORMAT.format( new Date() ) );
     return times;
   }
 
@@ -136,24 +162,5 @@ public class DailyLocation
   public String getRendered()
   {
     return rendered;
-  }
-  @XmlElement(name = "url")
-  private String url;
-  @XmlElement(name = "contact")
-  private String contact;
-  @XmlElement(name = "lat")
-  private String latitude;
-  @XmlElement(name = "long")
-  private String longitude;
-  @XmlElement(name = "color")
-  private String color;
-  @XmlElement(name = "times")
-  private Time times;
-  @XmlElement(name = "rendered")
-  private String rendered;
-  
-  public DailyLocation()
-  {
-    super();
   }
 }

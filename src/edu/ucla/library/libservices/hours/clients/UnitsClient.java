@@ -1,22 +1,20 @@
 package edu.ucla.library.libservices.hours.clients;
 
-//import com.sun.jersey.api.client.Client;
-//import com.sun.jersey.api.client.WebResource;
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
+
 import javax.ws.rs.core.MediaType;
+
+import javax.ws.rs.core.Response;
 
 import edu.ucla.library.libservices.hours.beans.UnitRoot;
 
-//import javax.ws.rs.core.MediaType;
-
 public class UnitsClient
 {
-  private Client client;
-  private WebTarget webResource;
-  private int institutionID;
+  private int      institutionID;
   private UnitRoot theUnits;
 
   public UnitsClient()
@@ -34,13 +32,24 @@ public class UnitsClient
     return institutionID;
   }
 
+  public void setTheUnits( UnitRoot theUnits )
+  {
+    this.theUnits = theUnits;
+  }
+
   public UnitRoot getTheUnits()
   {
+    Client             client;
+    Invocation.Builder invocationBuilder;
+    Response           response;
+    WebTarget          webTarget;
+
     client = ClientBuilder.newClient();
-    webResource =
-        client.target( "https://api3.libcal.com/api_hours_today.php?iid=".concat( String.valueOf( getInstitutionID() ) ).concat( "&lid=0" ).concat( "&format=json" ) );
-    theUnits =
-        webResource.request(MediaType.APPLICATION_JSON).get().readEntity( UnitRoot.class );
+    webTarget =
+      client.target( "https://api3.libcal.com/api_hours_today.php?iid=".concat( String.valueOf( getInstitutionID() ) ).concat( "&lid=0&format=json" ) );
+    invocationBuilder = webTarget.request( MediaType.APPLICATION_JSON );
+    response = invocationBuilder.get();
+    theUnits = response.readEntity( UnitRoot.class );
     return theUnits;
   }
 }

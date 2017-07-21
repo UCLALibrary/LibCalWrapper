@@ -7,12 +7,17 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlAccessorType( XmlAccessType.FIELD )
 public class Unit
 {
-  @XmlElement(name = "lid")
+  @XmlElement( name = "lid" )
   private int locationID;
-  @XmlElement(name = "name")
+  @XmlElement( name = "name" )
   private String name;
-  @XmlElement(name = "category")
+  @XmlElement( name = "category" )
   private String category;
+
+  public Unit()
+  {
+    super();
+  }
 
   public void setLocationID( int locationID )
   {
@@ -42,10 +47,5 @@ public class Unit
   public String getCategory()
   {
     return category;
-  }
-
-  public Unit()
-  {
-    super();
   }
 }

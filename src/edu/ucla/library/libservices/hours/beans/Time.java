@@ -1,5 +1,9 @@
 package edu.ucla.library.libservices.hours.beans;
 
+import edu.ucla.library.libservices.hours.utility.OpenChecker;
+
+import java.util.GregorianCalendar;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -17,6 +21,12 @@ public class Time
   private String text;
   @XmlElement( name = "hours", nillable = true )
   private List<Hour> hours;
+  private String date;
+
+  public Time()
+  {
+    super();
+  }
 
   public void setCurrentlyOpen( boolean currentlyOpen )
   {
@@ -25,7 +35,13 @@ public class Time
 
   public boolean isCurrentlyOpen()
   {
-    return currentlyOpen;
+    String start;
+    String end;
+
+    start = new StringBuffer( getDate() ).append( " " ).append( getHours().get( 0 ).getFrom() ).toString();
+    end = new StringBuffer( getDate() ).append( " " ).append( getHours().get( 0 ).getTo() ).toString();
+
+    return OpenChecker.isLibraryOpen( start.toUpperCase(), end.toUpperCase(), getStatus() );
   }
 
   public void setStatus( String status )
@@ -58,8 +74,13 @@ public class Time
     return hours;
   }
 
-  public Time()
+  public void setDate( String date )
   {
-    super();
+    this.date = date;
+  }
+
+  public String getDate()
+  {
+    return date;
   }
 }

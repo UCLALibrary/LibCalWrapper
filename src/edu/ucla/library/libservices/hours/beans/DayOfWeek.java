@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType( XmlAccessType.FIELD )
-public abstract class DayOfWeek
+public class DayOfWeek
 {
   @XmlElement(name = "times")
   private Time times;
@@ -14,6 +14,11 @@ public abstract class DayOfWeek
   @XmlElement(name = "rendered")
   private String rendered;
 
+  public DayOfWeek()
+  {
+    super();
+  }
+
   public void setTimes( Time times )
   {
     this.times = times;
@@ -21,6 +26,7 @@ public abstract class DayOfWeek
 
   public Time getTimes()
   {
+    times.setDate( getDate() );
     return times;
   }
 
@@ -42,10 +48,5 @@ public abstract class DayOfWeek
   public String getRendered()
   {
     return rendered;
-  }
-
-  public DayOfWeek()
-  {
-    super();
   }
 }

@@ -7,10 +7,20 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlAccessorType( XmlAccessType.FIELD )
 public class Week
 {
-  @XmlElement(name = "Sunday")
+  @XmlElement( name = "Sunday" )
   private Sunday sun;
-  @XmlElement(name = "Monday")
+  @XmlElement( name = "Monday" )
   private Monday mon;
+  @XmlElement( name = "Tuesday" )
+  private Tuesday tues;
+  @XmlElement( name = "Wednesday" )
+  private Wednesday weds;
+  @XmlElement( name = "Thursday" )
+  private Thursday thurs;
+  @XmlElement( name = "Friday" )
+  private Friday fri;
+  @XmlElement( name = "Saturday" )
+  private Saturday sat;
 
   public void setSun( Sunday sun )
   {
@@ -81,16 +91,6 @@ public class Week
   {
     return sat;
   }
-  @XmlElement(name = "Tuesday")
-  private Tuesday tues;
-  @XmlElement(name = "Wednesday")
-  private Wednesday weds;
-  @XmlElement(name = "Thursday")
-  private Thursday thurs;
-  @XmlElement(name = "Friday")
-  private Friday fri;
-  @XmlElement(name = "Saturday")
-  private Saturday sat;
 
   public Week()
   {

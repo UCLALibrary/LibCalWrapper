@@ -13,10 +13,10 @@ public class DailyLocationRoot
 {
   @XmlElement(name = "locations")
   private List<DailyLocation> locations;
-
-  public void setLocations( List<DailyLocation> locations )
+  
+  public DailyLocationRoot()
   {
-    this.locations = locations;
+    super();
   }
 
   public List<DailyLocation> getLocations()
@@ -24,8 +24,8 @@ public class DailyLocationRoot
     return locations;
   }
 
-  public DailyLocationRoot()
+  public void setLocations( List<DailyLocation> locations )
   {
-    super();
+    this.locations = locations;
   }
 }

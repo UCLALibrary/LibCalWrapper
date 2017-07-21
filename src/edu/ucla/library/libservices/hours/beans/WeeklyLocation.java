@@ -9,15 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlAccessorType( XmlAccessType.FIELD )
 public class WeeklyLocation
 {
-  @XmlElement(name = "lid")
-  private int locationID;
-  @XmlElement(name = "name")
-  private String name;
-  @XmlElement(name = "category")
-  private String category;
-  @XmlElement(name = "parent_lid", nillable = true)
-  private int parentLocationID;
-
   public void setLocationID( int locationID )
   {
     this.locationID = locationID;
@@ -127,6 +118,14 @@ public class WeeklyLocation
   {
     return weeks;
   }
+  @XmlElement(name = "lid")
+  private int locationID;
+  @XmlElement(name = "name")
+  private String name;
+  @XmlElement(name = "category")
+  private String category;
+  @XmlElement(name = "parent_lid", nillable = true)
+  private int parentLocationID;
   @XmlElement(name = "desc")
   private String description;
   @XmlElement(name = "url")
