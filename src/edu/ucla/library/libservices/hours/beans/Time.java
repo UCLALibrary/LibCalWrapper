@@ -18,8 +18,8 @@ public class Time
 {
   final static Logger logger = Logger.getLogger(Time.class);
 
-  //@XmlElement( name = "currently_open", nillable = true )
-  //private boolean currentlyOpen;
+  @XmlElement( name = "currently_open", nillable = true )
+  private boolean currentlyOpen;
   @XmlElement( name = "status" )
   private String status;
   @XmlElement( name = "text", nillable = true )
@@ -27,16 +27,16 @@ public class Time
   @XmlElement( name = "hours", nillable = true )
   private List<Hour> hours;
   private String date;
-  @XmlElement( name = "calculatedOpen", nillable = true )
-  @SuppressWarnings( "unused" )
-  private boolean calculatedOpen;
+  //@XmlElement( name = "calculatedOpen", nillable = true )
+  //@SuppressWarnings( "unused" )
+  //private boolean calculatedOpen;
 
   public Time()
   {
     super();
   }
 
-  /*public void setCurrentlyOpen( boolean currentlyOpen )
+  public void setCurrentlyOpen( boolean currentlyOpen )
   {
     this.currentlyOpen = currentlyOpen;
   }
@@ -46,17 +46,17 @@ public class Time
     String start;
     String end;
 
-    logger.info( "in isCurrentlyOpen() method" );
-    System.out.println( "in isCurrentlyOpen() method" );
+    logger.debug( "in isCurrentlyOpen() method" );
+    //System.out.println( "in isCurrentlyOpen() method" );
 
     start = new StringBuffer( getDate() ).append( " " ).append( getHours().get( 0 ).getFrom() ).toString();
     end = new StringBuffer( getDate() ).append( " " ).append( getHours().get( 0 ).getTo() ).toString();
     
-    logger.info( "calling OpenChecker with params " + start + ", " + end + ", " + getStatus() );
-    System.out.println( "calling OpenChecker with params " + start + ", " + end + ", " + getStatus() );
+    logger.debug( "calling OpenChecker with params " + start + ", " + end + ", " + getStatus() );
+    //System.out.println( "calling OpenChecker with params " + start + ", " + end + ", " + getStatus() );
 
     return OpenChecker.isLibraryOpen( start.toUpperCase(), end.toUpperCase(), getStatus() );
-  }*/
+  }
 
   public void setStatus( String status )
   {
@@ -101,7 +101,7 @@ public class Time
   /*public void setCalculatedOpen( boolean calculatedOpen )
   {
     this.calculatedOpen = calculatedOpen;
-  }*/
+  }
 
   public boolean isCalculatedOpen()
   {
@@ -118,5 +118,5 @@ public class Time
     System.out.println( "calling OpenChecker from isCalculatedOpen with params " + start + ", " + end + ", " + getStatus() );
 
     return OpenChecker.isLibraryOpen( start.toUpperCase(), end.toUpperCase(), getStatus() );
-  }
+  }*/
 }
