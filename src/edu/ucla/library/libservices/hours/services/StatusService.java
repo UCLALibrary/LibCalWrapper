@@ -32,8 +32,8 @@ public class StatusService
     DailyLocationRoot theUnit;
 
     docMaker = new DailyHoursClient();
-    docMaker.setInstitutionID(3244);
-    //docMaker.setInstitutionID( Integer.parseInt( config.getServletContext().getInitParameter( "iid.ucla" ) ) );
+    //docMaker.setInstitutionID(3244);
+    docMaker.setInstitutionID( Integer.parseInt( config.getServletContext().getInitParameter( "iid.ucla" ) ) );
     docMaker.setLocationID( unitID );
 
     theUnit = docMaker.getTheLocation();

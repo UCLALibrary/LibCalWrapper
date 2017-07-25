@@ -1,9 +1,10 @@
 package edu.ucla.library.libservices.hours.beans;
 
-//import edu.ucla.library.libservices.hours.clients.DailyHoursClient;
+import edu.ucla.library.libservices.hours.services.StatusService;
+import edu.ucla.library.libservices.hours.utility.EmptyChecker;
 import edu.ucla.library.libservices.hours.utility.OpenChecker;
 
-//import java.util.GregorianCalendar;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -11,12 +12,14 @@ import javax.xml.bind.annotation.XmlElement;
 
 import java.util.List;
 
+import javax.ws.rs.core.Response;
+
 import org.apache.log4j.Logger;
 
 @XmlAccessorType( XmlAccessType.FIELD )
 public class Time
 {
-  final static Logger logger = Logger.getLogger(Time.class);
+  final static Logger logger = Logger.getLogger( Time.class );
 
   @XmlElement( name = "currently_open", nillable = true )
   private boolean currentlyOpen;
@@ -27,9 +30,9 @@ public class Time
   @XmlElement( name = "hours", nillable = true )
   private List<Hour> hours;
   private String date;
-  //@XmlElement( name = "calculatedOpen", nillable = true )
-  //@SuppressWarnings( "unused" )
-  //private boolean calculatedOpen;
+  @XmlElement( name = "newField", nillable = true )
+  private boolean newField;
+  private int locationID;
 
   public Time()
   {
@@ -47,13 +50,18 @@ public class Time
     String end;
 
     logger.debug( "in isCurrentlyOpen() method" );
-    //System.out.println( "in isCurrentlyOpen() method" );
 
-    start = new StringBuffer( getDate() ).append( " " ).append( getHours().get( 0 ).getFrom() ).toString();
-    end = new StringBuffer( getDate() ).append( " " ).append( getHours().get( 0 ).getTo() ).toString();
-    
+    start =
+      new StringBuffer( !EmptyChecker.isEmpty( getDate() ) ? getDate() :
+                        new Date().toString() ).append( " " ).append( !EmptyChecker.isEmpty( getHours() ) ?
+                                                                      getHours().get( 0 ).getFrom() : "" ).toString();
+
+    end =
+      new StringBuffer( !EmptyChecker.isEmpty( getDate() ) ? getDate() :
+                        new Date().toString() ).append( " " ).append( !EmptyChecker.isEmpty( getHours() ) ?
+                                                                      getHours().get( 0 ).getTo() : "" ).toString();
+
     logger.debug( "calling OpenChecker with params " + start + ", " + end + ", " + getStatus() );
-    //System.out.println( "calling OpenChecker with params " + start + ", " + end + ", " + getStatus() );
 
     return OpenChecker.isLibraryOpen( start.toUpperCase(), end.toUpperCase(), getStatus() );
   }
@@ -98,25 +106,23 @@ public class Time
     return date;
   }
 
-  /*public void setCalculatedOpen( boolean calculatedOpen )
+  public void setNewField( boolean newField )
   {
-    this.calculatedOpen = calculatedOpen;
+    this.newField = newField;
   }
 
-  public boolean isCalculatedOpen()
+  public boolean isNewField()
   {
-    String start;
-    String end;
+    return true;
+  }
 
-    logger.info( "in isCalculatedOpen() method" );
-    System.out.println( "in isCalculatedOpen() method" );
+  public void setLocationID( int locationID )
+  {
+    this.locationID = locationID;
+  }
 
-    start = new StringBuffer( getDate() ).append( " " ).append( getHours().get( 0 ).getFrom() ).toString();
-    end = new StringBuffer( getDate() ).append( " " ).append( getHours().get( 0 ).getTo() ).toString();
-    
-    logger.info( "calling OpenChecker from isCalculatedOpen with params " + start + ", " + end + ", " + getStatus() );
-    System.out.println( "calling OpenChecker from isCalculatedOpen with params " + start + ", " + end + ", " + getStatus() );
-
-    return OpenChecker.isLibraryOpen( start.toUpperCase(), end.toUpperCase(), getStatus() );
-  }*/
+  public int getLocationID()
+  {
+    return locationID;
+  }
 }

@@ -151,6 +151,7 @@ public class DailyLocation
   public Time getTimes()
   {
     times.setDate( FORMAT.format( new Date() ) );
+    times.setLocationID( getLocationID() );
     return times;
   }
 
