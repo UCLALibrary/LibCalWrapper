@@ -17,14 +17,14 @@ public class Tester
 
   public static void main( String[] args )
   {
-    /*HoursService tester;
+    HoursService tester;
     Response response;
     //WeeklyLocationRoot theUnit;
     DailyLocationRoot theUnit;
     
     tester = new HoursService();
     //response = tester.getWeeks( 4707, 1 );
-    response = tester.getUnits( 2082 );
+    response = tester.getUnits( 4707 );
     //theUnit = ( WeeklyLocationRoot ) response.getEntity();
     theUnit = ( DailyLocationRoot ) response.getEntity();
     //System.out.println( "date = " +
@@ -36,12 +36,12 @@ public class Tester
     System.out.println( "library = " +
     theUnit.getLocations().get( 0 ).getName() );
     System.out.println( "open status = " +
-    theUnit.getLocations().get( 0 ).getTimes().isCurrentlyOpen() );*/
+    theUnit.getLocations().get( 0 ).getTimes().isCurrentlyOpen() );
     
-    Response response;
+    /*Response response;
     StatusService status;
     status = new StatusService();
     response = status.getStatus( 2082 );
-    System.out.println( "status from new service = " + response.getEntity() );
+    System.out.println( "status from new service = " + response.getEntity() );*/
   }
 }

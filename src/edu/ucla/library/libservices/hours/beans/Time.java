@@ -46,24 +46,7 @@ public class Time
 
   public boolean isCurrentlyOpen()
   {
-    String start;
-    String end;
-
-    logger.debug( "in isCurrentlyOpen() method" );
-
-    start =
-      new StringBuffer( !EmptyChecker.isEmpty( getDate() ) ? getDate() :
-                        new Date().toString() ).append( " " ).append( !EmptyChecker.isEmpty( getHours() ) ?
-                                                                      getHours().get( 0 ).getFrom() : "" ).toString();
-
-    end =
-      new StringBuffer( !EmptyChecker.isEmpty( getDate() ) ? getDate() :
-                        new Date().toString() ).append( " " ).append( !EmptyChecker.isEmpty( getHours() ) ?
-                                                                      getHours().get( 0 ).getTo() : "" ).toString();
-
-    logger.debug( "calling OpenChecker with params " + start + ", " + end + ", " + getStatus() );
-
-    return OpenChecker.isLibraryOpen( start.toUpperCase(), end.toUpperCase(), getStatus() );
+    return currentlyOpen;
   }
 
   public void setStatus( String status )
