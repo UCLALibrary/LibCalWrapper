@@ -1,18 +1,10 @@
 package edu.ucla.library.libservices.hours.beans;
 
-import edu.ucla.library.libservices.hours.services.StatusService;
-import edu.ucla.library.libservices.hours.utility.EmptyChecker;
-import edu.ucla.library.libservices.hours.utility.OpenChecker;
-
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 import java.util.List;
-
-import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 
@@ -30,9 +22,6 @@ public class Time
   @XmlElement( name = "hours", nillable = true )
   private List<Hour> hours;
   private String date;
-  @XmlElement( name = "newField", nillable = true )
-  private boolean newField;
-  private int locationID;
 
   public Time()
   {
@@ -87,25 +76,5 @@ public class Time
   public String getDate()
   {
     return date;
-  }
-
-  public void setNewField( boolean newField )
-  {
-    this.newField = newField;
-  }
-
-  public boolean isNewField()
-  {
-    return true;
-  }
-
-  public void setLocationID( int locationID )
-  {
-    this.locationID = locationID;
-  }
-
-  public int getLocationID()
-  {
-    return locationID;
   }
 }

@@ -69,7 +69,7 @@ public class DailyHoursClient
     end = System.currentTimeMillis();
     logger.debug( "libcal daily hours retrieval took " + ( ( end - start ) / 1000L ) + " secs" );
     logger.debug( "libcal daily hours response is " + response.getStatus() );
-    setOpen(theLocation);
+    setOpen( theLocation );
     return theLocation;
   }
 

@@ -19,24 +19,24 @@ public class Tester
   {
     HoursService tester;
     Response response;
-    //WeeklyLocationRoot theUnit;
-    DailyLocationRoot theUnit;
+    WeeklyLocationRoot theUnit;
+    //DailyLocationRoot theUnit;
     
     tester = new HoursService();
-    //response = tester.getWeeks( 4707, 1 );
-    response = tester.getUnits( 4707 );
-    //theUnit = ( WeeklyLocationRoot ) response.getEntity();
-    theUnit = ( DailyLocationRoot ) response.getEntity();
-    //System.out.println( "date = " +
-    //theUnit.getLocations().get( 0 ).getWeeks().get( 0 ).getFri().getTimes().getDate() );
+    response = tester.getWeeks( 4707, 1 );
+    //response = tester.getUnits( 4707 );
+    theUnit = ( WeeklyLocationRoot ) response.getEntity();
+    //theUnit = ( DailyLocationRoot ) response.getEntity();
     System.out.println( "date = " +
-    theUnit.getLocations().get( 0 ).getTimes().getDate() );
-    //System.out.println( "open status = " +
-    //theUnit.getLocations().get( 0 ).getWeeks().get( 0 ).getFri().getTimes().isCurrentlyOpen() );
+    theUnit.getLocations().get( 0 ).getWeeks().get( 0 ).getWeds().getTimes().getDate() );
+    //System.out.println( "date = " +
+    //theUnit.getLocations().get( 0 ).getTimes().getDate() );
+    System.out.println( "open status = " +
+    theUnit.getLocations().get( 0 ).getWeeks().get( 0 ).getWeds().getTimes().isCurrentlyOpen() );
     System.out.println( "library = " +
     theUnit.getLocations().get( 0 ).getName() );
-    System.out.println( "open status = " +
-    theUnit.getLocations().get( 0 ).getTimes().isCurrentlyOpen() );
+    //System.out.println( "open status = " +
+    //theUnit.getLocations().get( 0 ).getTimes().isCurrentlyOpen() );
     
     /*Response response;
     StatusService status;

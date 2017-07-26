@@ -29,7 +29,7 @@ public class OpenChecker
       return true;
     }
     else if ( status.equalsIgnoreCase( "closed" ) || status.equalsIgnoreCase( "not-set" ) ||
-              EmptyChecker.isEmpty( status ) )
+              status.equalsIgnoreCase( "text" ) || EmptyChecker.isEmpty( status ) )
     {
       logger.debug( "returning false due to closed/unset/empty status" );
       //System.out.println( "returning false due to closed/unset/empty status" );
