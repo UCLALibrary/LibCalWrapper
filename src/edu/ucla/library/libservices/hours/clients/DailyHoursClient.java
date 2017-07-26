@@ -1,6 +1,13 @@
 package edu.ucla.library.libservices.hours.clients;
 
+import edu.ucla.library.libservices.hours.beans.DailyLocation;
 import edu.ucla.library.libservices.hours.beans.DailyLocationRoot;
+
+import edu.ucla.library.libservices.hours.utility.EmptyChecker;
+
+import edu.ucla.library.libservices.hours.utility.OpenChecker;
+
+import java.util.Date;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -13,7 +20,7 @@ import org.apache.log4j.Logger;
 
 public class DailyHoursClient
 {
-  final static Logger logger = Logger.getLogger(DailyHoursClient.class);
+  final static Logger logger = Logger.getLogger( DailyHoursClient.class );
 
   private int institutionID;
   private int locationID;
@@ -61,7 +68,34 @@ public class DailyHoursClient
     theLocation = response.readEntity( DailyLocationRoot.class );
     end = System.currentTimeMillis();
     logger.debug( "libcal daily hours retrieval took " + ( ( end - start ) / 1000L ) + " secs" );
-    logger.debug("libcal daily hours response is " + response.getStatus());
+    logger.debug( "libcal daily hours response is " + response.getStatus() );
+    setOpen( theLocation );
     return theLocation;
+  }
+
+  private void setOpen( DailyLocationRoot theLocale )
+  {
+    for ( DailyLocation daily : theLocale.getLocations() )
+    {
+      String start;
+      String end;
+
+      logger.debug( "in setOpen() method" );
+
+      start =
+        new StringBuffer( !EmptyChecker.isEmpty( daily.getTimes().getDate() ) ? daily.getTimes().getDate() :
+                          new Date().toString() ).append( " " ).append( !EmptyChecker.isEmpty( daily.getTimes().getHours() ) ?
+                                                                        daily.getTimes().getHours().get( 0 ).getFrom() :
+                                                                        "" ).toString();
+      end =
+        new StringBuffer( !EmptyChecker.isEmpty( daily.getTimes().getDate() ) ? daily.getTimes().getDate() :
+                          new Date().toString() ).append( " " ).append( !EmptyChecker.isEmpty( daily.getTimes().getHours() ) ?
+                                                                        daily.getTimes().getHours().get( 0 ).getTo() :
+                                                                        "" ).toString();
+      logger.debug( "calling OpenChecker with params " + start + ", " + end + ", " + daily.getTimes().getStatus() );
+
+      daily.getTimes().setCurrentlyOpen( OpenChecker.isLibraryOpen( start.toUpperCase(), end.toUpperCase(),
+                                                                    daily.getTimes().getStatus() ) );
+    }
   }
 }

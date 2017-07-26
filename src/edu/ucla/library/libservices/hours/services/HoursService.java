@@ -37,8 +37,8 @@ public class HoursService
     DailyHoursClient docMaker;
 
     docMaker = new DailyHoursClient();
-    docMaker.setInstitutionID(3244);
-    //docMaker.setInstitutionID( Integer.parseInt( config.getServletContext().getInitParameter( "iid.ucla" ) ) );
+    //docMaker.setInstitutionID(3244);
+    docMaker.setInstitutionID( Integer.parseInt( config.getServletContext().getInitParameter( "iid.ucla" ) ) );
     docMaker.setLocationID( unitID );
 
     return Response.ok( docMaker.getTheLocation() ).build();
@@ -54,10 +54,10 @@ public class HoursService
       WeeklyLocationRoot theUnit;
 
       docMaker = new WeeklyLocationClient();
-      docMaker.setInstitutionID(3244);
-      //docMaker.setInstitutionID(Integer.parseInt(config.getServletContext().getInitParameter("iid.ucla")));
-      docMaker.setLocationID(0);
-      //docMaker.setLocationID(Integer.parseInt(config.getServletContext().getInitParameter("units.all")));
+      //docMaker.setInstitutionID(3244);
+      docMaker.setInstitutionID(Integer.parseInt(config.getServletContext().getInitParameter("iid.ucla")));
+      //docMaker.setLocationID(0);
+      docMaker.setLocationID(Integer.parseInt(config.getServletContext().getInitParameter("units.all")));
       docMaker.setWeeksCount(weekCount);
 
       allUnits = docMaker.getTheLocation();
