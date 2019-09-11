@@ -11,6 +11,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement( name="libcal" )
 public class WeeklyLocationRoot
 {
+  @XmlElement(name = "locations")
+  private List<WeeklyLocation> locations;
+
+  public WeeklyLocationRoot()
+  {
+    super();
+  }
+
   public void setLocations( List<WeeklyLocation> locations )
   {
     this.locations = locations;
@@ -19,12 +27,5 @@ public class WeeklyLocationRoot
   public List<WeeklyLocation> getLocations()
   {
     return locations;
-  }
-  @XmlElement(name = "locations")
-  private List<WeeklyLocation> locations;
-
-  public WeeklyLocationRoot()
-  {
-    super();
   }
 }

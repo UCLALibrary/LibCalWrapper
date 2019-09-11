@@ -1,9 +1,12 @@
 package edu.ucla.library.libservices.hours.services;
 
+import edu.ucla.library.libservices.hours.beans.DailyLocationRoot;
 import edu.ucla.library.libservices.hours.beans.WeeklyLocation;
 import edu.ucla.library.libservices.hours.beans.WeeklyLocationRoot;
 import edu.ucla.library.libservices.hours.clients.DailyHoursClient;
 import edu.ucla.library.libservices.hours.clients.WeeklyLocationClient;
+
+import edu.ucla.library.libservices.hours.exceptions.LibCalException;
 
 import java.util.List;
 
@@ -35,48 +38,69 @@ public class HoursService
   public Response getUnits( @PathParam( "unitID" ) int unitID )
   {
     DailyHoursClient docMaker;
+    DailyLocationRoot root;
 
     docMaker = new DailyHoursClient();
-    //docMaker.setInstitutionID(3244);
+    //docMaker.setInstitutionID( 3244 );
     docMaker.setInstitutionID( Integer.parseInt( config.getServletContext().getInitParameter( "iid.ucla" ) ) );
     docMaker.setLocationID( unitID );
 
-    return Response.ok( docMaker.getTheLocation() ).build();
-  }
-
-  @GET
-  @Produces("application/json")
-  @Path("/weekly/{unitID}/weeks/{weekCount}")
-  @SuppressWarnings( "oracle.jdeveloper.webservice.rest.broken-resource-warning" )
-  public Response getWeeks(@PathParam("unitID") int unitID, @PathParam("weekCount") int weekCount) {
-      WeeklyLocationClient docMaker;
-      WeeklyLocationRoot allUnits;
-      WeeklyLocationRoot theUnit;
-
-      docMaker = new WeeklyLocationClient();
-      //docMaker.setInstitutionID(3244);
-      docMaker.setInstitutionID(Integer.parseInt(config.getServletContext().getInitParameter("iid.ucla")));
-      //docMaker.setLocationID(0);
-      docMaker.setLocationID(Integer.parseInt(config.getServletContext().getInitParameter("units.all")));
-      docMaker.setWeeksCount(weekCount);
-
-      allUnits = docMaker.getTheLocation();
-      if ( unitID == 0 )
-      //if ( unitID == Integer.parseInt(config.getServletContext().getInitParameter("units.all")) )
+    try
+    {
+      root = docMaker.getTheLocation();
+      if ( root.getLocations().size() == 0 )
       {
-        return Response.ok(allUnits).build();
+        return Response.status( Response.Status.BAD_GATEWAY ).build();
       }
       else
       {
-        theUnit = new WeeklyLocationRoot();
-        theUnit.setLocations(getUnitTimes(allUnits, unitID));
-
-        return Response.ok(theUnit).build();
+        return Response.ok( root ).build();
       }
+    }
+    catch ( LibCalException lce )
+    {
+      return Response.status( Response.Status.fromStatusCode( Integer.parseInt( lce.getMessage() ) ) ).build();
+    }
+    catch ( Exception e )
+    {
+      return Response.serverError().build();
+    }
   }
 
-  private List<WeeklyLocation> getUnitTimes(WeeklyLocationRoot allUnits, int unitID) {
-      return allUnits.getLocations().stream().filter(b -> b.getLocationID() == unitID ||
-                                                     b.getParentLocationID() == unitID).collect(Collectors.toList());
+  @GET
+  @Produces( "application/json" )
+  @Path( "/weekly/{unitID}/weeks/{weekCount}" )
+  @SuppressWarnings( "oracle.jdeveloper.webservice.rest.broken-resource-warning" )
+  public Response getWeeks( @PathParam( "unitID" ) int unitID, @PathParam( "weekCount" ) int weekCount )
+  {
+    WeeklyLocationClient docMaker;
+    WeeklyLocationRoot allUnits;
+    WeeklyLocationRoot theUnit;
+
+    docMaker = new WeeklyLocationClient();
+    docMaker.setInstitutionID(Integer.parseInt(config.getServletContext().getInitParameter("iid.ucla")));
+    System.out.println( "received unit ID param " + unitID );
+    docMaker.setLocationID( unitID );
+    docMaker.setWeeksCount( weekCount );
+
+    allUnits = docMaker.getTheLocation();
+    //if ( unitID == 0 )
+    if ( unitID == Integer.parseInt(config.getServletContext().getInitParameter("units.all")) )
+    {
+      return Response.ok( allUnits ).build();
+    }
+    else
+    {
+      theUnit = new WeeklyLocationRoot();
+      theUnit.setLocations( getUnitTimes( allUnits, unitID ) );
+
+      return Response.ok( theUnit ).build();
+    }
+  }
+
+  private List<WeeklyLocation> getUnitTimes( WeeklyLocationRoot allUnits, int unitID )
+  {
+    return allUnits.getLocations().stream().filter( b -> b.getLocationID() == unitID ||
+                                                    b.getParentLocationID() == unitID ).collect( Collectors.toList() );
   }
 }

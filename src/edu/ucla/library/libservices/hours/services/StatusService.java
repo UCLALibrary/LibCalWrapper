@@ -3,6 +3,8 @@ package edu.ucla.library.libservices.hours.services;
 import edu.ucla.library.libservices.hours.beans.DailyLocationRoot;
 import edu.ucla.library.libservices.hours.clients.DailyHoursClient;
 
+import edu.ucla.library.libservices.hours.exceptions.LibCalException;
+
 import javax.servlet.ServletConfig;
 
 import javax.ws.rs.GET;
@@ -36,8 +38,14 @@ public class StatusService
     docMaker.setInstitutionID( Integer.parseInt( config.getServletContext().getInitParameter( "iid.ucla" ) ) );
     docMaker.setLocationID( unitID );
 
-    theUnit = docMaker.getTheLocation();
-
-    return Response.ok( theUnit.getLocations().get( 0 ).getTimes().isCurrentlyOpen() ).build();
+    try
+    {
+      theUnit = docMaker.getTheLocation();
+      return Response.ok( theUnit.getLocations().get( 0 ).getTimes().isCurrentlyOpen() ).build();
+    }
+    catch ( LibCalException e )
+    {
+      return Response.serverError().build();
+    }
   }
 }

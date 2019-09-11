@@ -78,10 +78,9 @@ public class HoursService
     WeeklyLocationRoot theUnit;
 
     docMaker = new WeeklyLocationClient();
-    //docMaker.setInstitutionID( 3244 );
     docMaker.setInstitutionID(Integer.parseInt(config.getServletContext().getInitParameter("iid.ucla")));
-    //docMaker.setLocationID( 0 );
-    docMaker.setLocationID(Integer.parseInt(config.getServletContext().getInitParameter("units.all")));
+    System.out.println( "received unit ID param " + unitID );
+    docMaker.setLocationID( unitID );
     docMaker.setWeeksCount( weekCount );
 
     allUnits = docMaker.getTheLocation();

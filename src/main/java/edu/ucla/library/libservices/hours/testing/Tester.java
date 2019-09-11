@@ -4,10 +4,17 @@ import edu.ucla.library.libservices.hours.beans.DailyLocation;
 import edu.ucla.library.libservices.hours.beans.DailyLocationRoot;
 import edu.ucla.library.libservices.hours.beans.WeeklyLocationRoot;
 import edu.ucla.library.libservices.hours.services.HoursService;
+import edu.ucla.library.libservices.hours.clients.WeeklyLocationClient;
 
+import edu.ucla.library.libservices.hours.clients.XmlWeeklyLocationClient;
 import edu.ucla.library.libservices.hours.services.StatusService;
 
 import javax.ws.rs.core.Response;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import java.time.format.DateTimeParseException;
 
 public class Tester
 {
@@ -18,35 +25,29 @@ public class Tester
 
   public static void main( String[] args )
   {
-    /*for ( Response.Status theStatus : Response.Status.values() )
-    {
-      System.out.println( "status " + theStatus + " has value " + theStatus.getStatusCode() );
-      //Response.Status.fromStatusCode( 300 );
-      //Response.status(  );
-    }*/
-    HoursService tester;
-    Response response;
-    //WeeklyLocationRoot theUnit;
-    DailyLocationRoot theUnit;
+    String combined;
+    String date;
+    String hours;
 
-    tester = new HoursService();
-    //response = tester.getWeeks( 4707, 1 );
-    response = tester.getUnits( -1 );
-    System.out.println( "return status = " + response.getStatus() );
-    //theUnit = ( WeeklyLocationRoot ) response.getEntity();
-    //theUnit = ( DailyLocationRoot ) response.getEntity();
-    //System.out.println( "date = " + theUnit.getLocations().get( 0 ).getWeeks().get( 0 ).getFri().getTimes().getDate() );
-    //System.out.println( "date = " + theUnit.getLocations().get( 0 ).getTimes().getDate() );
-    //System.out.println( "open status = " + theUnit.getLocations().get( 0 ).getWeeks().get( 0 ).getFri().getTimes().isCurrentlyOpen() );
-    //System.out.println( "library = " + theUnit.getLocations().get( 0 ).getName() );
-    //System.out.println( "open status = " + theUnit.getLocations().get( 0 ).getTimes().isCurrentlyOpen() );
-    //theUnit.getLocations().stream().forEach( l -> output( l ) );
+    date = "2019-09-11";
+    hours = LocalDateTime.now().format( DateTimeFormatter.ofPattern( " ha" ) );
+    combined = date.concat( hours );
+    System.out.println( "combined hours = " + combined );
+    System.out.println( "as LocalDateTime = " + LocalDateTime.parse(  combined,DateTimeFormatter.ofPattern( "yyyy-MM-dd ha" ) ) );
+    /*WeeklyLocationClient client;
+    WeeklyLocationRoot theLocation;
+    long start, end;
 
-    /*Response response;
-    StatusService status;
-    status = new StatusService();
-    response = status.getStatus( 2082 );
-    System.out.println( "status from new service = " + response.getEntity() );*/
+    start = System.currentTimeMillis();
+    client = new WeeklyLocationClient();
+    client.setInstitutionID( 3244 );
+    client.setLocationID( 6134 );
+    client.setWeeksCount( 8 );
+
+    theLocation = client.getTheLocation();
+    System.out.println( "weekly results for " + theLocation.getLocations().get( 0 ).getName() + " places " );
+    end = System.currentTimeMillis();
+    System.out.println( "libcal weekly hours retrieval took " + ( ( end - start ) / 1000L ) + " secs" );*/
   }
 
   private static void output( DailyLocation daily )
