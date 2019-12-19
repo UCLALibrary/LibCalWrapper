@@ -11,7 +11,12 @@ import javax.servlet.ServletConfig;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
-@Path( "/units" )
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+@Api(value = "/units")
+@Path("/units")
 public class UnitsService
 {
   @Context
@@ -23,14 +28,17 @@ public class UnitsService
   }
 
   @GET
-  @Produces( "application/json" )
+  @Produces("application/json")
+  @ApiOperation(value = "Retrieves list of Library units with schedules",
+                notes = "Use unitIds from this service to get daily/weekly hours from /hours service",
+                response = Response.class, httpMethod = "GET", produces = "application/json")
   public Response getUnits()
   {
     UnitsClient docMaker;
 
     docMaker = new UnitsClient();
-    docMaker.setInstitutionID( Integer.parseInt( config.getServletContext().getInitParameter( "iid.ucla" ) ) );
+    docMaker.setInstitutionID(Integer.parseInt(config.getServletContext().getInitParameter("iid.ucla")));
 
-    return Response.ok( docMaker.getTheUnits() ).build();
+    return Response.ok(docMaker.getTheUnits()).build();
   }
 }
