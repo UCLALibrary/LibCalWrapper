@@ -1,5 +1,6 @@
 package edu.ucla.library.libservices.hours.services;
 
+import edu.ucla.library.libservices.hours.beans.UnitRoot;
 import edu.ucla.library.libservices.hours.clients.UnitsClient;
 
 import javax.ws.rs.GET;
@@ -31,7 +32,8 @@ public class UnitsService
   @Produces("application/json")
   @ApiOperation(value = "Retrieves list of Library units with schedules",
                 notes = "Use unitIds from this service to get daily/weekly hours from /hours service",
-                response = Response.class, httpMethod = "GET", produces = "application/json")
+                responseContainer = "Response", response = UnitRoot.class, httpMethod = "GET",
+                produces = "application/json")
   public Response getUnits()
   {
     UnitsClient docMaker;

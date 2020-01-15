@@ -20,7 +20,7 @@
     </init-param>
     <init-param>
       <param-name>swagger.api.basepath</param-name>
-      <param-value>https://webservices-test.library.ucla.edu/calendar</param-value>
+      <param-value>https://webservices.library.ucla.edu/calendar</param-value>
     </init-param>
     <load-on-startup>2</load-on-startup>
   </servlet>

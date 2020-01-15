@@ -41,8 +41,8 @@ public class HoursService
   @Produces("application/json")
   @Path("/today/{unitID}")
   @ApiOperation(value = "Finds operating hours for current day for particular Library unit",
-                notes = "Valid unitID values are pulled from /units service", response = Response.class,
-                httpMethod = "GET", produces = "application/json")
+                notes = "Valid unitID values are pulled from /units service", responseContainer = "Response",
+                response = DailyLocationRoot.class, httpMethod = "GET", produces = "application/json")
   public Response getUnits(@ApiParam(value = "unit(s) to be retrieved", required = true) @PathParam("unitID")
                            int unitID)
   {
@@ -82,7 +82,8 @@ public class HoursService
   @SuppressWarnings("oracle.jdeveloper.webservice.rest.broken-resource-warning")
   @ApiOperation(value = "Finds operating hours for weekCount weeks for particular Library unit, or all units",
                 notes = "Valid unitID values are pulled from /units service, or 0 for all units",
-                response = Response.class, httpMethod = "GET", produces = "application/json")
+                responseContainer = "Response", response = WeeklyLocationRoot.class, httpMethod = "GET",
+                produces = "application/json")
   public Response getWeeks(@ApiParam(value = "unit(s) to be retrieved, 0 for all units", required = true)
                            @PathParam("unitID") int unitID,
                            @ApiParam(value = "number of weeks to be retrieved", required = true) @PathParam("weekCount")

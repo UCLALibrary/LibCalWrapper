@@ -22,7 +22,7 @@ public class SwaggerBootstrap
     beanConfig = new BeanConfig();
     beanConfig.setVersion( "2.0.0" );
     beanConfig.setSchemes( new String[] { "https" } );
-    beanConfig.setHost( "webservices-test.library.ucla.edu" );
+    beanConfig.setHost( "webservices.library.ucla.edu" );
     beanConfig.setBasePath( "/calendar" );
     beanConfig.setResourcePackage( "edu.ucla.library.libservices.hours.services" ); 
     beanConfig.setScan( true );
