@@ -5,11 +5,11 @@ import java.time.format.DateTimeFormatter;
 
 import java.time.format.DateTimeParseException;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 public class OpenChecker
 {
-  final static Logger logger = Logger.getLogger( OpenChecker.class );
+  //final static Logger logger = Logger.getLogger( OpenChecker.class );
 
   public OpenChecker()
   {
@@ -22,11 +22,11 @@ public class OpenChecker
     LocalDateTime formattedEnd;
     LocalDateTime today;
 
-    logger.debug( "in isLibraryOpen method" );
+    //logger.debug( "in isLibraryOpen method" );
     //System.out.println( "in isLibraryOpen method" );
     if ( status.equalsIgnoreCase( "24hours" ) )
     {
-      logger.debug( "returning true due to 24hours status" );
+      //logger.debug( "returning true due to 24hours status" );
       //System.out.println( "returning true due to 24hours status" );
       return true;
     }
@@ -34,7 +34,7 @@ public class OpenChecker
               status.equalsIgnoreCase( "text" ) || status.equalsIgnoreCase( "ByApp" ) ||
               EmptyChecker.isEmpty( status ) )
     {
-      logger.debug( "returning false due to closed/unset/empty/appointment status" );
+      //logger.debug( "returning false due to closed/unset/empty/appointment status" );
       //System.out.println( "returning false due to closed/unset/empty status" );
       return false;
     }
@@ -52,13 +52,13 @@ public class OpenChecker
 
       if ( ( today.isEqual( formattedStart ) || today.isAfter( formattedStart ) ) && today.isBefore( formattedEnd ) )
       {
-        logger.debug( "returning true due to current time between unit open/close" );
+        //logger.debug( "returning true due to current time between unit open/close" );
         //System.out.println( "returning true due to current time between unit open/close" );
         return true;
       }
       else
       {
-        logger.debug( "returning false due to current time outside unit open/close" );
+        //logger.debug( "returning false due to current time outside unit open/close" );
         //System.out.println( "returning false due to current time outside unit open/close" );
         return false;
       }
@@ -74,7 +74,7 @@ public class OpenChecker
     justDate = DateTimeFormatter.ofPattern( "yyyy-MM-dd" );
     justHour = DateTimeFormatter.ofPattern( "yyyy-MM-dd ha" );
     withMinutes = DateTimeFormatter.ofPattern( "yyyy-MM-dd h:ma" );
-    
+
     if ( timestamp.trim().length() == 10 )
     {
       try
@@ -84,7 +84,7 @@ public class OpenChecker
       }
       catch ( DateTimeParseException dtpe )
       {
-        logger.error( "time parse error, justDate: " + dtpe.getMessage() );
+        //logger.error( "time parse error, justDate: " + dtpe.getMessage() );
         return null;
       }
     }
@@ -96,7 +96,7 @@ public class OpenChecker
       }
       catch ( DateTimeParseException dtpe )
       {
-        logger.error( "time parse error, withMinutes: " + dtpe.getMessage() );
+        //logger.error( "time parse error, withMinutes: " + dtpe.getMessage() );
         return null;
       }
     }
@@ -108,7 +108,7 @@ public class OpenChecker
       }
       catch ( DateTimeParseException dtpe )
       {
-        logger.error( "time parse error,justHour: " + dtpe.getMessage() );
+        //logger.error( "time parse error,justHour: " + dtpe.getMessage() );
         return null;
       }
     }

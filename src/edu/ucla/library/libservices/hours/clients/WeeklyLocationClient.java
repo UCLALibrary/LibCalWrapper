@@ -17,11 +17,11 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 public class WeeklyLocationClient
 {
-  final static Logger logger = Logger.getLogger( WeeklyLocationClient.class );
+  //final static Logger logger = Logger.getLogger( WeeklyLocationClient.class );
   final static private String URL_BASE = "https://api3.libcal.com/api_hours_grid.php?iid=";
   final static private String JSON_TAIL = "&format=json";
   final static private String XML_TAIL = "&format=xml";
@@ -71,7 +71,7 @@ public class WeeklyLocationClient
     jsonString =
       new StringBuffer( URL_BASE ).append( getInstitutionID() ).append( "&lid=" ).append( getLocationID() ).append( "&weeks=" ).append( getWeeksCount() ).append( JSON_TAIL ).toString();
     //System.out.println( "calling " + jsonString );
-    logger.debug( "calling " + jsonString );
+    //logger.debug( "calling " + jsonString );
     webTarget = client.target( jsonString );
     invocationBuilder = webTarget.request( MediaType.APPLICATION_JSON );
     response = invocationBuilder.get();
@@ -79,8 +79,8 @@ public class WeeklyLocationClient
     end = System.currentTimeMillis();
     //System.out.println( "libcal weekly hours retrieval took " + ( ( end - start ) / 1000L ) + " secs" );
     //System.out.println( "libcal weekly hours response is " + response.getStatus() );
-    logger.debug( "libcal weekly hours retrieval took " + ( ( end - start ) / 1000L ) + " secs" );
-    logger.debug( "libcal weekly hours response is " + response.getStatus() );
+    //logger.debug( "libcal weekly hours retrieval took " + ( ( end - start ) / 1000L ) + " secs" );
+    //logger.debug( "libcal weekly hours response is " + response.getStatus() );
 
     if ( theLocation.getLocations() != null && !theLocation.getLocations().isEmpty() )
       theLocation.getLocations().stream().forEach( l -> l.getWeeks().stream().forEach( w -> setOpen( w ) ) );
@@ -90,7 +90,7 @@ public class WeeklyLocationClient
       xmlString =
         new StringBuffer( URL_BASE ).append( getInstitutionID() ).append( "&lid=" ).append( getLocationID() ).append( "&weeks=" ).append( getWeeksCount() ).append( XML_TAIL ).toString();
       System.out.println( "calling " + xmlString );
-      logger.debug( "calling " + xmlString );
+      //logger.debug( "calling " + xmlString );
       theLocation.setLocations( LocationListBuilder.buildLocations( xmlString ) );
       if ( theLocation.getLocations() != null && !theLocation.getLocations().isEmpty() )
         theLocation.getLocations().stream().forEach( l -> l.getWeeks().stream().forEach( w -> setOpen( w ) ) );
@@ -111,7 +111,7 @@ public class WeeklyLocationClient
   private void setOpen( Week theWeek )
   {
     //System.out.println( "in setOpen() method from streams" );
-    logger.debug( "in setOpen() method from streams" );
+    //logger.debug( "in setOpen() method from streams" );
     theWeek.getSun().getTimes().setCurrentlyOpen( determinOpen( theWeek.getSun().getTimes() ) );
     theWeek.getMon().getTimes().setCurrentlyOpen( determinOpen( theWeek.getMon().getTimes() ) );
     theWeek.getTues().getTimes().setCurrentlyOpen( determinOpen( theWeek.getTues().getTimes() ) );
@@ -123,7 +123,7 @@ public class WeeklyLocationClient
 
   /*private void setOpen( WeeklyLocationRoot theLocale )
   {
-    logger.debug( "in setOpen() method" );
+    //logger.debug( "in setOpen() method" );
 
     for ( WeeklyLocation weekly : theLocale.getLocations() )
     {
@@ -155,7 +155,7 @@ public class WeeklyLocationClient
                                                                   theTime.getHours().get( 0 ).getTo() : "" ).toString();
 
     //System.out.println( "calling OpenChecker with params " + start + ", " + end + ", " + theTime.getStatus() );
-    logger.debug( "calling OpenChecker with params " + start + ", " + end + ", " + theTime.getStatus() );
+    //logger.debug( "calling OpenChecker with params " + start + ", " + end + ", " + theTime.getStatus() );
 
     return OpenChecker.isLibraryOpen( start.toUpperCase(), end.toUpperCase(), theTime.getStatus() );
   }

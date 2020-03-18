@@ -13,7 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 import org.w3c.dom.Document;
 
@@ -38,7 +38,7 @@ public class XmlWeeklyLocationClient
   //final static private String URL_BASE = "https://api3.libcal.com/api_hours_grid.php?iid=";
   final static private String URL_BASE = "https://api3.libcal.com/api_hours_today.php?iid=";
   final static private String URL_TAIL = "&format=xml";
-  final static Logger logger = Logger.getLogger( WeeklyLocationClient.class );
+  //final static Logger logger = Logger.getLogger( WeeklyLocationClient.class );
 
   private int institutionID;
   private int locationID;
@@ -98,7 +98,7 @@ public class XmlWeeklyLocationClient
 
     urlString = new StringBuffer( URL_BASE ).append( getInstitutionID() ).append( "&lid=" ).append( getLocationID() ).append( "&weeks=" ).append( getWeeksCount() ).append( URL_TAIL ).toString();
     System.out.println( "calling " + urlString );
-    logger.debug( "calling " + urlString );
+    //logger.debug( "calling " + urlString );
 
     try
     {
@@ -118,27 +118,27 @@ public class XmlWeeklyLocationClient
     }
     catch ( MalformedURLException mue )
     {
-      logger.error( "bad URL error: ", mue );
+      //logger.error( "bad URL error: ", mue );
     }
     catch ( IOException ioe )
     {
-      logger.error( "I/O error: ", ioe );
+      //logger.error( "I/O error: ", ioe );
     }
     catch ( ParserConfigurationException pce )
     {
-      logger.error( "Parsing error: ", pce );
+      //logger.error( "Parsing error: ", pce );
     }
     catch ( SAXException saxe )
     {
-      logger.error( "SAX error: ", saxe );
+      //logger.error( "SAX error: ", saxe );
     }
     catch ( TransformerConfigurationException tce )
     {
-      logger.error( "Transform config error: ", tce );
+      //logger.error( "Transform config error: ", tce );
     }
     catch ( TransformerException te )
     {
-      logger.error( "Transform error: ", te );
+      //logger.error( "Transform error: ", te );
     }
     /*catch ( JAXBException jaxbe )
     {

@@ -17,13 +17,13 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 public class DailyHoursClient
 {
   private static final int OK = 200;
 
-  final static Logger logger = Logger.getLogger( DailyHoursClient.class );
+  //final static Logger logger = Logger.getLogger( DailyHoursClient.class );
 
   private int institutionID;
   private int locationID;
@@ -80,12 +80,12 @@ public class DailyHoursClient
     //end = System.currentTimeMillis();
     //logger.debug( "libcal daily hours retrieval took " + ( ( end - start ) / 1000L ) + " secs" );
     //logger.debug( "libcal daily hours response is " + response.getStatus() );
-    
+
     if ( response.getStatus() != OK )
     {
       throw new LibCalException( String.valueOf( response.getStatus() ) );
     }
-    
+
     //if ( response.getLength() <= 0 )
     if ( theLocation.getLocations().size() == 0 )
     {
@@ -100,8 +100,8 @@ public class DailyHoursClient
   {
     String start;
     String end;
-    
-    logger.debug( "in setOpen() method" );
+
+    //logger.debug( "in setOpen() method" );
 
     start =
       new StringBuffer( !EmptyChecker.isEmpty( daily.getTimes().getDate() ) ? daily.getTimes().getDate() :
@@ -113,7 +113,7 @@ public class DailyHoursClient
                         new Date().toString() ).append( " " ).append( !EmptyChecker.isEmpty( daily.getTimes().getHours() ) ?
                                                                       daily.getTimes().getHours().get( 0 ).getTo() :
                                                                       "" ).toString();
-    logger.debug( "calling OpenChecker with params " + start + ", " + end + ", " + daily.getTimes().getStatus() );
+    //logger.debug( "calling OpenChecker with params " + start + ", " + end + ", " + daily.getTimes().getStatus() );
 
     daily.getTimes().setCurrentlyOpen( OpenChecker.isLibraryOpen( start.toUpperCase(), end.toUpperCase(),
                                                                   daily.getTimes().getStatus() ) );
