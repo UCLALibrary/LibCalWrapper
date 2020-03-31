@@ -17,13 +17,14 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class DailyHoursClient
 {
   private static final int OK = 200;
 
-  //final static Logger logger = Logger.getLogger( DailyHoursClient.class );
+  final static Logger logger = LogManager.getLogger( DailyHoursClient.class );
 
   private int institutionID;
   private int locationID;
