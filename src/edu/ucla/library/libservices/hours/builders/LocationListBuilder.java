@@ -20,11 +20,12 @@ import org.w3c.dom.traversal.TreeWalker;
 
 import org.xml.sax.SAXException;
 
-//import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class LocationListBuilder
 {
-  //final static Logger logger = Logger.getLogger( LocationListBuilder.class );
+  final static Logger logger = LogManager.getLogger( LocationListBuilder.class );
 
   public LocationListBuilder()
   {
@@ -60,12 +61,12 @@ public class LocationListBuilder
     }
     catch ( ParserConfigurationException pce )
     {
-      //logger.error( "parser error: " + pce.getMessage(), pce );
+      logger.error( "parser error: " + pce.getMessage() );
       return new ArrayList<WeeklyLocation>();
     }
     catch ( IOException | SAXException e )
     {
-      //logger.error( "parser error: " + e.getMessage(), e );
+      logger.error( "parser error: " + e.getMessage() );
       return new ArrayList<WeeklyLocation>();
     }
   }
