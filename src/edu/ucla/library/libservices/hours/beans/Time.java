@@ -6,12 +6,13 @@ import javax.xml.bind.annotation.XmlElement;
 
 import java.util.List;
 
-//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @XmlAccessorType( XmlAccessType.FIELD )
 public class Time
 {
-  //final static Logger logger = Logger.getLogger( Time.class );
+  final static Logger logger = LogManager.getLogger( Time.class );
 
   @XmlElement( name = "currently_open", nillable = true )
   private boolean currentlyOpen;
