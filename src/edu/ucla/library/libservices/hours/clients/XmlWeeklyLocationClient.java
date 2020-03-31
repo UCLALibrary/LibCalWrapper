@@ -13,7 +13,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.w3c.dom.Document;
 
@@ -38,7 +39,7 @@ public class XmlWeeklyLocationClient
   //final static private String URL_BASE = "https://api3.libcal.com/api_hours_grid.php?iid=";
   final static private String URL_BASE = "https://api3.libcal.com/api_hours_today.php?iid=";
   final static private String URL_TAIL = "&format=xml";
-  //final static Logger logger = Logger.getLogger( WeeklyLocationClient.class );
+  final static Logger logger = LogManager.getLogger( WeeklyLocationClient.class );
 
   private int institutionID;
   private int locationID;
@@ -118,27 +119,27 @@ public class XmlWeeklyLocationClient
     }
     catch ( MalformedURLException mue )
     {
-      //logger.error( "bad URL error: ", mue );
+      logger.error( "bad URL error: " + mue.getMessage() );
     }
     catch ( IOException ioe )
     {
-      //logger.error( "I/O error: ", ioe );
+      logger.error( "I/O error: " + ioe.getMessage() );
     }
     catch ( ParserConfigurationException pce )
     {
-      //logger.error( "Parsing error: ", pce );
+      logger.error( "Parsing error: " + pce.getMessage() );
     }
     catch ( SAXException saxe )
     {
-      //logger.error( "SAX error: ", saxe );
+      logger.error( "SAX error: " + saxe.getMessage() );
     }
     catch ( TransformerConfigurationException tce )
     {
-      //logger.error( "Transform config error: ", tce );
+      logger.error( "Transform config error: " + tce.getMessage() );
     }
     catch ( TransformerException te )
     {
-      //logger.error( "Transform error: ", te );
+      logger.error( "Transform error: " + te.getMessage() );
     }
     /*catch ( JAXBException jaxbe )
     {
