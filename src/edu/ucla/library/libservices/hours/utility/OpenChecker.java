@@ -5,11 +5,12 @@ import java.time.format.DateTimeFormatter;
 
 import java.time.format.DateTimeParseException;
 
-//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class OpenChecker
 {
-  //final static Logger logger = Logger.getLogger( OpenChecker.class );
+  //final static Logger logger = LogManager.getLogger( OpenChecker.class );
 
   public OpenChecker()
   {
@@ -84,7 +85,7 @@ public class OpenChecker
       }
       catch ( DateTimeParseException dtpe )
       {
-        //logger.error( "time parse error, justDate: " + dtpe.getMessage() );
+        logger.error( "time parse error, justDate: " + dtpe.getMessage() );
         return null;
       }
     }
@@ -96,7 +97,7 @@ public class OpenChecker
       }
       catch ( DateTimeParseException dtpe )
       {
-        //logger.error( "time parse error, withMinutes: " + dtpe.getMessage() );
+        logger.error( "time parse error, withMinutes: " + dtpe.getMessage() );
         return null;
       }
     }
@@ -108,7 +109,7 @@ public class OpenChecker
       }
       catch ( DateTimeParseException dtpe )
       {
-        //logger.error( "time parse error,justHour: " + dtpe.getMessage() );
+        logger.error( "time parse error,justHour: " + dtpe.getMessage() );
         return null;
       }
     }
