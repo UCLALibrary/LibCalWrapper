@@ -17,11 +17,12 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class WeeklyLocationClient
 {
-  //final static Logger logger = Logger.getLogger( WeeklyLocationClient.class );
+  final static Logger logger = LogManager.getLogger( WeeklyLocationClient.class );
   final static private String URL_BASE = "https://api3.libcal.com/api_hours_grid.php?iid=";
   final static private String JSON_TAIL = "&format=json";
   final static private String XML_TAIL = "&format=xml";
