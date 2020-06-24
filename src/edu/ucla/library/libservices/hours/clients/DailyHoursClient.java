@@ -71,29 +71,30 @@ public class DailyHoursClient
     invocationBuilder = webTarget.request( MediaType.APPLICATION_JSON );
     response = invocationBuilder.get();
 
-    /*logger.debug( "libcal daily hours length is " + response.getLength() );
-    if ( response.getLength() <= 0 )
+    try
     {
-      throw new LibCalException( String.valueOf( Response.Status.BAD_GATEWAY.getStatusCode() ) );
-    }*/
-
-    theLocation = response.readEntity( DailyLocationRoot.class );
-    //end = System.currentTimeMillis();
-    //logger.debug( "libcal daily hours retrieval took " + ( ( end - start ) / 1000L ) + " secs" );
-    //logger.debug( "libcal daily hours response is " + response.getStatus() );
+	    theLocation = response.readEntity( DailyLocationRoot.class );
+	}
+	catch (Exception e)
+	{
+		logger.error( "error making units root: " + e.getMessage() );
+		theLocation = null;
+	}
 
     if ( response.getStatus() != OK )
     {
       throw new LibCalException( String.valueOf( response.getStatus() ) );
     }
 
-    //if ( response.getLength() <= 0 )
-    if ( theLocation.getLocations().size() == 0 )
+    if ( theLocation == null || theLocation.getLocations().size() == 0 )
     {
       throw new LibCalException( String.valueOf( Response.Status.BAD_GATEWAY.getStatusCode() ) );
     }
 
-    theLocation.getLocations().stream().forEach( l -> setOpen( l ) );
+    if ( theLocation != null && theLocation.getLocations().size() > 0 )
+    {
+      theLocation.getLocations().stream().forEach( l -> setOpen( l ) );
+	}
     return theLocation;
   }
 

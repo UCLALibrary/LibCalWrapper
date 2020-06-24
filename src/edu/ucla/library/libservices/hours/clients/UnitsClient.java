@@ -12,8 +12,13 @@ import javax.ws.rs.core.Response;
 
 import edu.ucla.library.libservices.hours.beans.UnitRoot;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class UnitsClient
 {
+  final static Logger logger = LogManager.getLogger( UnitsClient.class );
+
   private int      institutionID;
   private UnitRoot theUnits;
 
@@ -49,7 +54,15 @@ public class UnitsClient
       client.target( "https://api3.libcal.com/api_hours_today.php?iid=".concat( String.valueOf( getInstitutionID() ) ).concat( "&lid=0&format=json" ) );
     invocationBuilder = webTarget.request( MediaType.APPLICATION_JSON );
     response = invocationBuilder.get();
-    theUnits = response.readEntity( UnitRoot.class );
+    try
+    {
+	    theUnits = response.readEntity( UnitRoot.class );
+	}
+	catch (Exception e)
+	{
+		logger.error( "error making units root: " + e.getMessage() );
+		theUnits = null;
+	}
     return theUnits;
   }
 }

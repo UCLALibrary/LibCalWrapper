@@ -5,12 +5,15 @@ import java.time.format.DateTimeFormatter;
 
 import java.time.format.DateTimeParseException;
 
+//import java.util.logging.LogManager;
+//import java.util.logging.Logger;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class OpenChecker
 {
-  //final static Logger logger = LogManager.getLogger( OpenChecker.class );
+  final static Logger logger = LogManager.getLogger( OpenChecker.class );
 
   public OpenChecker()
   {
@@ -45,6 +48,13 @@ public class OpenChecker
       formattedEnd = parseDate( toDate );
       today = LocalDateTime.now();
       //System.out.println( "current time = " + today );
+
+      if ( formattedStart == null || formattedEnd == null )
+      {
+        logger.debug( "returning false due to bad date formats" );
+        //System.out.println( "returning false due to current time outside unit open/close" );
+        return false;
+	  }
 
       if ( formattedStart.isAfter( formattedEnd ) )
       {
