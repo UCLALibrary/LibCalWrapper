@@ -1,14 +1,9 @@
 language: java
 jdk:
-#- oraclejdk11
-- openjdk8 
-matrix:
-  include:
-    - jdk: openjdk8
-#      before_install:
-#        - rm "${JAVA_HOME}/lib/security/cacerts"
-#        - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
-notifications:
-  slack:
-    rooms:
-      secure: uMbdSEbf/SLBYB8iGiOMU4aHnafbpxKaJOYLcHuDunGWOOiuOttzfDj5UvB2O9RLizVImqh7A/Dlx3ec16Nsfp9sunjoXikKXh7J7Vk17/F7k3xL0E5G/U7iWLcoExmPxFuc5hnpGHdLJVxFQZaDCRmBCRbJi1R75E5tnfo1d5ihEt3GijQO2RBZ/chBMXj17sQIP5tQrYEitD7+0pJKuyfwiPkiuTto81Y6Q4bN7T/jroBauR7Z1U7cP8u28j+RnHJckoPpEW8WE7FHSruPl18cn5IodhI7U1enLs9CFOm2JU10pgtnQSpnXiInQWzCh8kwernsp5+4SbZAlcOHjtVUr4Yeb0AvPgydC2ht9ka6hYe6gyRwhOdOFxjzwBfGN4Gg2NRbFD2kE0fJBcVU2yx8BmWrxQ2X/hiumuN2dUxmkj8ET7dHjqdKJzdvUD3inWxS8h7uf0nXTtq6ppmZtYr+c6qtdpsLy+eULDIXm7JA+NTq4FD7S4Lhw1OCcrFNfH+85z0COzjjM86YVd67V5Y3aWjW3VvT49PvasbpgcjOZu+SRdKHQ9vnPxoU2zxSVILCkQw/5ysYC5T3LTYEYo4J0fkk6+oT3CBqbEW6xpmx3QGq59LQ9EvEf/7kMRgPyPjZJAqkg9VkSDBPRr0R3GuxfuZXLD46EzK9z2PvEpE=
+- openjdk8
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: scripts/deploy.sh
+  on:
+    branch: master
