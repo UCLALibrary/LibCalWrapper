@@ -25,3 +25,12 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -ntp package
+    - name: Deploy with Jenkins
+      env:
+        CI_WS_SSH_PRIV_KEY: ${{ secrets.CI_WS_SSH_PRIV_KEY }}
+        CI_JENKINS_DEPLOY_TOKEN: ${{ secrets.CI_JENKINS_DEPLOY_TOKEN }}
+        CI_JENKINS_JOB_URI: ${{ secrets.CI_JENKINS_JOB_URI }}
+        CI_JENKINS_TOMCAT_HOST: ${{ secrets.CI_JENKINS_TOMCAT_HOST }}
+        CI_JENKINS_USER_CREDS: ${{ secrets.CI_JENKINS_USER_CREDS }}
+        CI_WEBAPP_NAME: ${{ secrets.CI_WEBAPP_NAME }}
+      run: sh scripts/deploy.sh
